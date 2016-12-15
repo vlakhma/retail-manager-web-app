@@ -12,10 +12,10 @@ import org.json.JSONObject;
 
 
 public class JSONUtil {
-	private static String GEOURL ="http://maps.googleapis.com/maps/api/geocode/json?address=&amp;sensor=true";
+	private static String GEOURL ="http://maps.googleapis.com/maps/api/geocode/json?address=<PLACE>&sensor=true";
 
 	  public static String readLatLongFromAddress(String address) throws Exception {
-		  String url =GEOURL.replaceAll("", address) ;
+		  String url =GEOURL.replaceAll("<PLACE>", address) ;
 	      String jsonText = getJSON(url);
 	      JSONObject json = new JSONObject(jsonText);
 		    JSONArray mainAry=json.getJSONArray("results");

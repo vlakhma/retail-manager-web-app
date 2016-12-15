@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.retailmanager.bean.ShopAddress;
 import com.retailmanager.bean.ShopBean;
 import com.retailmanager.main.RetailManagerLauncher;
+import com.retailmanager.util.JSONUtil;
 
 /**
  * @author Vishal Lakhmapurkar
@@ -94,9 +95,11 @@ public class RetailManagerControllerTests {
 	
 	@Test
 	public void getShopList() throws Exception {
+		String latLong = JSONUtil.readLatLongFromAddress("Warje");
+		String[] latLongAry = latLong.split(":");
 		@SuppressWarnings("rawtypes")
 		ResponseEntity entity = this.testRestTemplate.getForEntity(
-				"http://localhost:" + this.port + "/getShopList?Lng=77.10249019999999&amp;Lat=28.7040592",
+				"http://localhost:" + this.port + "/getShopList?Lng="+latLongAry[0]+"&Lat="+latLongAry[1],
 				List.class);
 
 		then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
